@@ -1,0 +1,25 @@
+version: '3'
+
+services: 
+    test:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app  
+        command: ["npm", "run", "test"]  
+    web:
+        build: 
+            # Where we want files to come from
+            # If you had nested the react project, you'd 
+            # pass that in e.g. ./react
+            context: .
+            dockerfile: Dockerfile.dev
+
+
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - /app/node_modules
+            - .:/app    
